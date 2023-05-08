@@ -1,5 +1,7 @@
 package com.auth.security.Service;
 
+import com.auth.security.DTO.DepotDTO;
+import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.DTO.SocieteDTO;
 import com.auth.security.Entity.*;
 import com.auth.security.Exception.MyResourceNotFoundException;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,14 +68,28 @@ public void delete(Integer id) {
 
         }
 @Override
-public List<Depot> getStocksBySocieteId(Integer id) {
-        Optional<Societe> societe = societeDAO.findById(id);
-        if (societe.isPresent()) {
-                return societe.get().getStockList(); //getstockbyIdEntreprise
-        } else {
-                throw new MyResourceNotFoundException("Societe not found with id " + id);
+        public List<DepotDTO> getDepotBySocieteId(Integer id) {
+                Optional<Societe> societe = societeDAO.findById(id);
+                if (societe.isPresent()) {
+                        List<DepotDTO> depotDTOList = new ArrayList<>();
+                        for (Depot depot : societe.get().getStockList()) {
+                                DepotDTO depotDTO = new DepotDTO();
+                                depotDTO.setName(depot.getName());
+                                depotDTO.setAdresse(depot.getAdresse());
+                                depotDTO.setQuantity(depot.getQuantity());
+                                depotDTO.setIdEntreprise(depot.getSociete().getId());
+                                depotDTO.setId(depot.getId());
+                                depotDTOList.add(depotDTO);
+                        }
+                        return depotDTOList;
+                } else {
+                        throw new MyResourceNotFoundException("Societe not found with id " + id);
+                }
         }
-}
+
+
+
+
 
         @Override
         public List<Gestionnaire> getGestionnaire(Integer Id) {
@@ -85,12 +102,27 @@ public List<Depot> getStocksBySocieteId(Integer id) {
 }
 
         @Override
-        public List<Produit> getProduit(Integer Id) {
+        public List<ProduitDTO> getProduit(Integer Id) {
         Societe societe = societeDAO.findById(Id).orElse(null);
         if(societe == null){
-                return (List<Produit>)
+                return (List<ProduitDTO>)
                         ResponseEntity.notFound().build();
 
         }
-        return societe.getProdList();}
+                List<Produit> produits = societe.getProdList();
+                List<ProduitDTO> customProduits = new ArrayList<>();
+                for (Produit produit : produits) {
+                        ProduitDTO dto = new ProduitDTO();
+                        dto.setId(produit.getId());
+                        dto.setCategory(produit.getCategorie().getId());
+                        dto.setName(produit.getName());
+                        dto.setDescription(produit.getDescription());
+                        dto.setPrice(produit.getPrice());
+                        dto.setImage(produit.getImage());
+                        dto.setQuantity(produit.getQuantity());
+                        dto.setInventoryStatus(produit.getInventoryStatus());
+                        customProduits.add(dto);
+                }
+                return customProduits;
+}
 }

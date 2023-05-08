@@ -1,17 +1,21 @@
+import { Categorie } from "./categorie";
+
 interface InventoryStatus {
     label: string;
     value: string;
 }
 export interface Product {
-    id?: string;
+    id?: number;
     code?: string;
     name?: string;
     description?: string;
     price?: number;
     quantity?: number;
     inventoryStatus?: InventoryStatus;
-    category?: string;
+    category?: number;
     image?: string;
-    rating?: number;
+    // rating?: number;
     societe?: number;
+    depotId?:number;
+    
 }

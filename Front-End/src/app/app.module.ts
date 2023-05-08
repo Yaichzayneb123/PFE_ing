@@ -25,6 +25,6 @@ import { PhotoService } from './demo/service/photo.service';
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

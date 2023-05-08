@@ -1,5 +1,7 @@
 package com.auth.security.Service;
 
+import com.auth.security.DTO.DepotDTO;
+import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.DTO.SocieteDTO;
 import com.auth.security.Entity.Gestionnaire;
 import com.auth.security.Entity.Produit;
@@ -15,9 +17,9 @@ public interface SocieteService {
     List<Societe> findAll();
     void delete (Integer id);
 
-    List<Depot> getStocksBySocieteId(Integer id);
+    List<DepotDTO> getDepotBySocieteId(Integer id);
 
     List<Gestionnaire> getGestionnaire (Integer Id);
-    List<Produit> getProduit (Integer Id);
+    List<ProduitDTO> getProduit (Integer Id);
 
 }

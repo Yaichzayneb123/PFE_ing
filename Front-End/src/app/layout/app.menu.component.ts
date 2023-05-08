@@ -32,11 +32,17 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Home Admin',
                                 items: [
                                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dash'] },
+                                    { label: 'Depot', icon: 'pi pi-fw pi-image', routerLink: ['/dash/uikit/media'] },
                                     { label: 'Gestion User', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/table'] },
+                                    // {
+                                    //     label: 'Gestion produit',
+                                    //     icon: 'pi pi-fw pi-shopping-cart',
+                                    //     routerLink: ['/dash/pages/crud']
+                                    // },
                                     {
-                                        label: 'Gestion produit',
-                                        icon: 'pi pi-fw pi-shopping-cart',
-                                        routerLink: ['/dash/pages/crud']
+                                        label: 'category',
+                                        icon: 'pi pi-fw pi-server',
+                                        routerLink: ['/dash/pages/empty']
                                     },
                                     { label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/dash/uikit/list'] },
                                     {
@@ -46,6 +52,8 @@ export class AppMenuComponent implements OnInit {
                                     },
                                     // { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/dash/uikit/menu'], routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' } },
                                     { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/dash/uikit/input'] },
+                                    
+                                    
                                     {
                                         label: 'Auth',
                                         icon: 'pi pi-fw pi-user',

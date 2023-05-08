@@ -1,12 +1,14 @@
-import { Image } from './../../../api/image';
+import { Image } from '../../../modéle/image';
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/demo/api/product';
+import { Product } from 'src/app/demo/modéle/product';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { CategorieService } from 'src/app/demo/service/categorie.service';
+import { Categorie } from 'src/app/demo/modéle/categorie';
 @Component({
     templateUrl: './crud.component.html',
     providers: [MessageService]
@@ -14,7 +16,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class CrudComponent implements OnInit {
 
     
-
+    productId:any;
     productDialog: boolean = false;
     
     productDialogupdate: boolean=false;
@@ -34,12 +36,13 @@ export class CrudComponent implements OnInit {
     cols: any[] = [];
 
     statuses: any[] = [];
-    product: any;
+    product: Product = {} ;
+ 
 
     image : any;
     userFile : any;
     imageURL : any;
-    currentUser: any;
+    idDepot: any;
     gesti: Product[] =[];
     id: any;
     
@@ -48,22 +51,21 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService,private  Service: LayoutService, private messageService: MessageService,private router :Router, private act: ActivatedRoute) { }
+    cat: Categorie[] = [];
+    
+    selectedCategory: any;
+  
+
+    constructor(private productService: ProductService,private serviceCategorie:CategorieService,private  Service: LayoutService, private messageService: MessageService,private router :Router, private act: ActivatedRoute) { }
 
     ngOnInit() {
-
-        this.currentUser=this.Service.getDataFromToken();
-        console.log(this.currentUser.id);
-
-        this.productService.getProdbyIdSociete(this.currentUser.id ).then(data => this.gesti = data);
-        
-        // this.productService.getProducts().then(data => this.products = data);
-        // console.log(this.product.id)
-
+      this.idDepot= this.act.snapshot.paramMap.get('id');
+          this.getProductsBySociete();
+        this.serviceCategorie.getAllCategorie().then(data => this.cat = data);
         this.cols = [
             { field: 'product', header: 'Product' },
             { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
+             { field: 'category', header: 'Category' },
             // { field: 'rating', header: 'Reviews' },
             { field: 'inventoryStatus', header: 'Status' }
         ];
@@ -74,28 +76,44 @@ export class CrudComponent implements OnInit {
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
 
-       
     }
-    modifier(){
-        // var eventData = JSON.stringify(this.product);
-        this.productService.update(this.product, this.product.id ).subscribe(
-            
-        res=>{
+ getProductsBySociete(){
+  this.idDepot= this.act.snapshot.paramMap.get('id');
+  this.productService.getProdbyIdSociete(this.idDepot ).subscribe({
+    next :(res:any)=>{
+       this.gesti =res
+       console.log(res);
+    }
+  }) 
 
+ }
+    modifier(){
+      this.idDepot= this.act.snapshot.paramMap.get('id');
+        this.product.depotId=this.idDepot;
+      
+        //this.product.societe=this.currentUser.id
+
+        this.productService.update(this.id, this.product ).subscribe(
+        res=>{
+          console.log(res);
+    
              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products updated', life: 3000 });
              this.ngOnInit()
              this.hideDialog()
+             this.product = {};
+             
           },
           err=>{
             console.log(err);
     
           }
         )
-    
+      
       }
 
     openNew() {
-        this.product = {};
+        this.product = {...this.product};
+       this.productId =this.product.id;
         this.submitted = false;
         this.productDialog = true;
         
@@ -106,6 +124,7 @@ export class CrudComponent implements OnInit {
     }
 
     editProduct(product: Product) {
+      this.id = product.id
         this.product = { ...product };
         this.productDialogupdate = true;
         
@@ -140,6 +159,8 @@ export class CrudComponent implements OnInit {
         this.deleteProductDialog = false;
         this.submitted = false;
     }
+    
+   
 
     // saveProduct() {
     //     this.submitted = true;
@@ -168,8 +189,10 @@ export class CrudComponent implements OnInit {
 
     saveEvent(){
         // this.product=this.form.value;
-        this.product.societe=this.currentUser.id;
-        console.log(this.product.societe);
+        //this.product.depotId=1;
+        this.idDepot= this.act.snapshot.paramMap.get('id');
+        this.product.depotId=this.idDepot;
+        console.log(this.product.depotId);
         console.log(this.product);
         var eventData = JSON.stringify(this.product);
         console.log(eventData);
@@ -196,28 +219,6 @@ export class CrudComponent implements OnInit {
         reader.onload = (res=>{this.imageURL = reader.result})
         console.log(this.userFile);
     }
-
-
-    // onSelectedImage(e:any){
-    //     this.image = e.target.files[0];
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(this.image);
-    //     reader.onload = (res=>{this.imageURL = reader.result})
-    //     console.log(this.image);
-    //   }
-
-
-    // findIndexById(id: string): number {
-    //     let index = -1;
-    //     for (let i = 0; i < this.products.length; i++) {
-    //         if (this.products[i].id === id) {
-    //             index = i;
-    //             break;
-    //         }
-    //     }
-
-    //     return index;
-    // }
 
     createId(): string {
         let id = '';
@@ -263,6 +264,11 @@ export class CrudComponent implements OnInit {
         )
     
       }
+
+
+      
       
       
 }
+
+

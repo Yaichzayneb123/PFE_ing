@@ -1,5 +1,7 @@
 package com.auth.security.controller;
 
+import com.auth.security.DTO.DepotDTO;
+import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.DTO.SocieteDTO;
 import com.auth.security.Entity.Gestionnaire;
 import com.auth.security.Entity.Produit;
@@ -27,10 +29,10 @@ public class SocieteController {
     {
         return ResponseEntity.ok(service.save(dto));
     }
-    @GetMapping("/{id}/stocks")
-    public ResponseEntity<List<Depot>> getStocksBySocieteId(@PathVariable Integer id) {
-        List<Depot> stocks = service.getStocksBySocieteId(id);
-        return new ResponseEntity<>(stocks, HttpStatus.OK);
+    @GetMapping("/depot/{id}")
+    public ResponseEntity<List<DepotDTO>> getDepotBySocieteId(@PathVariable Integer id) {
+        List<DepotDTO> depots = service.getDepotBySocieteId(id);
+        return new ResponseEntity<>(depots, HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -45,7 +47,7 @@ public class SocieteController {
     }
 
     @GetMapping("/produit/{id}")
-    public List<Produit> getProduit (@PathVariable Integer id){
+    public List<ProduitDTO> getProduit (@PathVariable Integer id){
         return service.getProduit(id);
     }
 

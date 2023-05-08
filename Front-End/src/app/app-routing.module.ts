@@ -1,3 +1,4 @@
+
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
@@ -16,7 +17,8 @@ import { PassGuard } from './demo/service/pass.guard';
                     { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
-                    { path: 'variant', loadChildren: () => import('./demo/components/product-info/product-info.module').then(m => m.ProductInfoModule) }
+                    { path: 'variant', loadChildren: () => import('./demo/components/product-info/product-info.module').then(m => m.ProductInfoModule) },
+                   
 
 
                 ]

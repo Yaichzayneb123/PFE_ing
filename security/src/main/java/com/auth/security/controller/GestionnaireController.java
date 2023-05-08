@@ -19,8 +19,7 @@ import java.util.List;
 public class GestionnaireController {
     @Autowired
     private GestionnaireServiceImpl service;
-    @Autowired
-    private GestionnaireDAO gestionnaireDAO;
+
 
 
 

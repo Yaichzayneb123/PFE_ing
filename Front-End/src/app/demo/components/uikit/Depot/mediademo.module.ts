@@ -6,6 +6,11 @@ import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'primeng/carousel';
+import { ToolbarModule } from 'primeng/toolbar';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
 	imports: [
@@ -14,7 +19,12 @@ import { CarouselModule } from 'primeng/carousel';
 		ButtonModule,
 		ImageModule,
 		GalleriaModule,
-		CarouselModule
+		CarouselModule,
+		ToolbarModule,
+		DialogModule,
+		FormsModule,
+		InputTextModule,
+		ToastModule
 	],
 	declarations: [MediaDemoComponent]
 })

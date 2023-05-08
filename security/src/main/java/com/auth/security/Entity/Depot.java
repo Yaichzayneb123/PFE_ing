@@ -22,8 +22,13 @@ public class Depot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "codeproduit")
-    private String codeProduit;
+
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "adresse")
+    private String adresse;
 
 
     @Column(name = "quantity")
@@ -37,7 +42,7 @@ public class Depot {
 
     @OneToMany(mappedBy = "depot", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Produit> produit;
+    private List<Produit> produitList;
 
 
 

@@ -3,10 +3,14 @@ package com.auth.security.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,11 +21,6 @@ public class Variant  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Column(name = "taille")
-    private String Taille;
-
-    @Column(name = "color")
-    private String color;
 
     @ManyToOne()
     @JoinColumn(name = "idproduit")
@@ -29,10 +28,11 @@ public class Variant  {
     private Produit produit;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idcategorie")
-    @JsonBackReference
-    private Categorie categorie;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "variant_sousOption",
+            joinColumns = @JoinColumn(name = "variant_id"),
+            inverseJoinColumns = @JoinColumn(name = "sousOption_id"))
+    private List<SousOption> sousOptionList ;
 
 
 }

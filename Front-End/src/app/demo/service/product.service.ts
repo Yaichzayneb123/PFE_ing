@@ -1,4 +1,4 @@
-import { Product } from './../api/product';
+import { Product } from '../modéle/product';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -32,16 +32,23 @@ export class ProductService {
     // }
 
   
-      update(product: any, id: number):Observable<any>{
-        return this.http.put<any>(`http://localhost:8086/api/v1/produit/` + id, product);
+      update( id: any, product: any ):Observable<any>{
+        console.log(product);
+       
+        return this.http.put<any>('http://localhost:8086/api/v1/produit/' + id, product);
       }
 
       getProductById( id: number){
         return this.http.get<any>('http://localhost:8086/api/v1/produit/get/' + id);
                 
     }
-    getProdbyIdSociete(id: any) {
-        return this.http.get<any>(`http://localhost:8086/api/v1/entreprise/produit/` + id)
+    getProdbyIdSociete(id: any) :Observable<any>{
+        return this.http.get<any>(`http://localhost:8086/api/v1/depot/produit/` + id)
+           
+    
+    }
+    getProdbyIdCategorie(id: any) {
+        return this.http.get<any>(`http://localhost:8086/api/v1/produit/` + id)
             .toPromise()
             .then(res => res as Product[])
             .then(data => data);

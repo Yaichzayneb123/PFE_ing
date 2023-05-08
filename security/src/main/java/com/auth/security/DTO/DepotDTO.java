@@ -1,7 +1,10 @@
 package com.auth.security.DTO;
 
 import com.auth.security.Entity.Depot;
+import com.auth.security.Entity.Produit;
 import lombok.*;
+
+import java.util.List;
 
 
 @Builder
@@ -9,28 +12,38 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DepotDTO {
-
-    private String codeProduit;
-
-
+    private Integer Id;
     private int quantity;
-
     private Integer idEntreprise;
+    private String adresse;
+    private String name;
+
+
 
     public static Depot toEntity(DepotDTO dto){
         Depot depot= new Depot();
 
-        depot.setCodeProduit(dto.getCodeProduit());
-        depot.setQuantity(dto.getIdEntreprise());
+        depot.setName(dto.getName());
+        depot.setAdresse(dto.getAdresse());
+        depot.setQuantity(dto.getQuantity());
+        //depot.setProduit(depot.getProduit().get());
+
+
+
         return depot;
     }
 
     public static DepotDTO toDTO (Depot depot){
         DepotDTO dto= new DepotDTO();
 
-        dto.setCodeProduit(depot.getCodeProduit());
+        dto.setAdresse(depot.getAdresse());
+        dto.setName(depot.getName());
         dto.setQuantity(depot.getQuantity());
+        dto.setIdEntreprise(depot.getSociete().getId());
         return dto;
+
+
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.auth.security.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -29,8 +30,13 @@ public class Categorie {
     @Column(name = "designation")
     private String designation;
 
-    @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
-    @Column(name = "variantList")
+    @Column(name = "description")
+    private String description;
+
+
+
+
+    @OneToMany(mappedBy = "categorie")
     @JsonManagedReference
-    private List<Variant> variantList;
+    private List<Produit>  listProduit;
 }

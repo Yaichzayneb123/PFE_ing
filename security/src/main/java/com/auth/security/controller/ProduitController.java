@@ -1,6 +1,8 @@
 package com.auth.security.controller;
 
 import com.auth.security.DTO.ProduitDTO;
+import com.auth.security.Entity.Categorie;
+import com.auth.security.Entity.Depot;
 import com.auth.security.Entity.Produit;
 import com.auth.security.Repository.ProduitDAO;
 import com.auth.security.Service.ProduitServiceImpl;
@@ -34,21 +36,21 @@ public class ProduitController {
     ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     @GetMapping("/getproduit")
-    public ResponseEntity<List<Produit>> getProduits(){
+    public ResponseEntity<List<ProduitDTO>> getProduits(){
         return ResponseEntity.ok().body(service.getProduits());
     }
 
 
     @PostMapping(value="/Add", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<Produit> addEvent(@RequestPart("produit") String pro, @RequestPart("image") MultipartFile file) throws IOException {
+    public ResponseEntity<ProduitDTO> addEvent(@RequestPart("produit") String pro, @RequestPart("image") MultipartFile file) throws IOException {
 
-        Produit produit= service.save(pro,file);
+        ProduitDTO produit= service.save(pro,file);
         return new ResponseEntity<>(produit, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produit> updateProduit(@PathVariable("id") Integer id, @RequestBody ProduitDTO produit) {
-        Produit updatedProduit = service.updateProduit(id, produit);
+    public ResponseEntity<ProduitDTO> updateProduit(@PathVariable("id") Integer id, @RequestBody ProduitDTO produit) {
+        ProduitDTO updatedProduit = service.updateProduit(id, produit);
         return new ResponseEntity<>(updatedProduit, HttpStatus.OK);
     }
 
@@ -59,6 +61,11 @@ public class ProduitController {
     @DeleteMapping("/del/{id}")
     public void delete(@PathVariable() Integer id) {
         service.Delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public List<Produit> getProductsByIdCategorie(@PathVariable Integer id) {
+        return service.getproductsByIdcategorie(id);
     }
 
 

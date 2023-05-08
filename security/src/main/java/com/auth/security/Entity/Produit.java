@@ -2,6 +2,7 @@ package com.auth.security.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -38,8 +39,7 @@ public class Produit  {
     @Column(name = "quantity")
     private String quantity;
 
-    @Column(name = "category")
-    private String category;
+
 
 
     @Column(name = "inventoryStatus")
@@ -56,6 +56,12 @@ public class Produit  {
     @OneToMany(mappedBy = "produit")
     @JsonManagedReference
     private List<Variant> variant;
+
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    @JsonBackReference
+    private Categorie categorie ;
+
 
     @ManyToOne
     @JoinColumn(name = "id_societe")

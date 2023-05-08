@@ -1,7 +1,7 @@
-import { Gesti} from './../api/customer';
+import { Gesti} from '../modéle/customer';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Customer } from '../api/customer';
+import { Customer } from '../modéle/customer';
 import { Observable } from 'rxjs';
 
 @Injectable()

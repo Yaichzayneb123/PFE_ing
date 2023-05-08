@@ -17,21 +17,21 @@ export class TreeDemoComponent implements OnInit {
 
     selectedFiles2: TreeNode[] = [];
 
-    selectedFiles3: TreeNode = {};
+    // selectedFiles3: TreeNode = {};
 
     cols: any[] = [];
 
     constructor(private nodeService: NodeService) {}
 
     ngOnInit() {
-        this.nodeService.getFiles().then(files => this.files1 = files);
-        this.nodeService.getFilesystem().then(files => this.files2 = files);
-        this.nodeService.getFiles().then(files => {
-            this.files3 = [{
-                label: 'Root',
-                children: files
-            }];
-        });
+        // this.nodeService.getFiles().then(files => this.files1 = files);
+        // this.nodeService.getFilesystem().then(files => this.files2 = files);
+        // this.nodeService.getFiles().then(files => {
+        //     this.files3 = [{
+        //         label: 'Root',
+        //         children: files
+        //     }];
+        // });
 
         this.cols = [
             { field: 'name', header: 'Name' },

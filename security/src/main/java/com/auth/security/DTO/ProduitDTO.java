@@ -10,13 +10,15 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ProduitDTO {
+    private Integer Id;
     private String name;
     private String description;
     private String price;
     private String image;
-    private Integer idStock;
     private String quantity;
-    private String category;
+    private Integer category;
+   private Integer depotId;
     private String inventoryStatus;
     private Integer societe;
+
 }

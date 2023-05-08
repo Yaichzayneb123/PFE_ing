@@ -1,5 +1,6 @@
 package com.auth.security.controller;
 
+import com.auth.security.DTO.DepotDTO;
 import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.DTO.VariantDTO;
 import com.auth.security.Entity.Produit;
@@ -39,5 +40,13 @@ public class VariantController {
     public ResponseEntity<List<Variant>> getVariants(){
         return ResponseEntity.ok().body(service.getAllVariants());
     }
+
+    @GetMapping("/getvariantByIdProduit/{id}")
+    public ResponseEntity<List<VariantDTO>> getVariantsByIdProd(@PathVariable Integer id){
+        List<VariantDTO> variants = service.getVariantsByIdProduit(id);
+        return new ResponseEntity<>(variants, HttpStatus.OK);
+    }
+
+
 
 }

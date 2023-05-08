@@ -1,0 +1,140 @@
+<div class="grid p-fluid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton pRipple label="New Depot" icon="pi pi-plus" class="p-button-warning mr-2" (click)="openDepot()"></button>
+                        
+                    </div>
+                </ng-template>
+            </p-toolbar>
+            <h5>List Depot </h5>
+            <p-carousel [value]="depo" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="carouselResponsiveOptions">
+                <ng-template let-dep pTemplate="item">
+                        <div class="border-round m-2 text-center p-2" style="border: 1px solid var(--surface-d)">
+                            <div class="my-5">
+                                <img src="assets/demo/images/product/dep.jpg" [alt]="dep.name" class="shadow-4" width="90%"/>
+                            </div>
+                            <div>
+                                <h5 class="mb-1">Name: {{dep.name}}</h5>
+                                <h6 class="mt-0 mb-3">Adresse: {{dep.adresse}}</h6>
+                                <!-- <span [class]="'product-badge status-'+product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span> -->
+                                <div class="my-5">
+                                    <!-- <button pButton pRipple icon="pi pi-search" class="mr-2 p-button-rounded"></button>
+                                    <button pButton pRipple icon="pi pi-star-fill" class="mr-2 p-button-rounded p-button-success"></button>
+                                    <button pButton pRipple icon="pi pi-cog" class="p-button-rounded p-button-info"></button> -->
+
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editDepot(dep)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mr-2" (click)="deleteDepot(dep.id)"></button>
+                                    <button pButton pRipple icon="pi pi-info-circle" class="p-button-rounded p-button-info mt-2" [routerLink]="['/dash/pages/crud/', dep.id]" >  See products</button>
+                                </div>
+                            </div>
+                        </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+
+    <p-dialog [(visible)]="depotDialog" [style]="{width: '450px'}" header="save Depot"  class="p-fluid">
+		<ng-template pTemplate="content">
+			
+		
+		<!-- <input type="file" class="file-upload"  > -->
+		<div class="field">
+			<label for="name">Name</label>
+			<input type="text" pInputText id="name" name="Name"  [(ngModel)]="depot.name" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+        <div class="field">
+			<label for="name">Adresse</label>
+			<input type="text" pInputText id="name" name="adresse"  [(ngModel)]="depot.adresse" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+
+		<div class="field">
+			<label for="name">quantity</label>
+			<input type="text" pInputText id="nameaa" name="lastName"  [(ngModel)]="depot.quantity" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+		
+			
+		</ng-template>
+
+
+		<ng-template pTemplate="footer">
+			<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+			<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveEvent()"></button>
+		</ng-template>
+	</p-dialog>
+
+    <p-dialog [(visible)]="deleteDepotDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+		<div class="flex align-items-center justify-content-center">
+			<i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+			<span>Are you sure you want to delete selected <b>{{depot.name}}</b>?</span>
+		</div>
+		<ng-template pTemplate="footer">
+			<button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteDepotDialog = false"></button>
+			<button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="delete(id)"></button>
+		</ng-template>
+	</p-dialog>
+
+    <p-dialog [(visible)]="updateDepotDialog" [style]="{width: '450px'}" header="save Depot"  class="p-fluid">
+		<ng-template pTemplate="content">
+			
+		
+		<!-- <input type="file" class="file-upload"  > -->
+		<div class="field">
+			<label for="name">Name</label>
+			<input type="text" pInputText id="name" name="Name"  [(ngModel)]="depot.name" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+        <div class="field">
+			<label for="name">Adresse</label>
+			<input type="text" pInputText id="name" name="adresse"  [(ngModel)]="depot.adresse" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+
+		<div class="field">
+			<label for="name">quantity</label>
+			<input type="text" pInputText id="nameaa" name="lastName"  [(ngModel)]="depot.quantity" />
+			<!-- <small class="ng-dirty ng-invalid" >Name is required.</small> -->
+		</div>
+		
+			
+		</ng-template>
+
+
+		<ng-template pTemplate="footer">
+			<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+			<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="modifier()"></button>
+		</ng-template>
+	</p-dialog>
+
+    <!-- <div class="col-12">
+        <div class="card">
+            <h5>Image</h5>
+            <div class="flex justify-content-center">
+                <p-image src="assets/demo/images/galleria/galleria10.jpg" alt="Image" width="250" [preview]="true"></p-image>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <h5>Galleria</h5>
+            <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions"
+                        [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="6" [circular]="true">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.itemImageSrc" style="width: 100%; display: block;"/>
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid nogutter justify-center">
+                        <img [src]="item.thumbnailImageSrc" style="display: block;"/>
+                    </div>
+                </ng-template>
+            </p-galleria>
+        </div>
+    </div>-->
+</div> 

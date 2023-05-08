@@ -1,9 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-import { Variant } from '../api/variant';
+import { SousOption, Variant } from '../modéle/variant';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +11,18 @@ export class VariantService {
 
   constructor(private http: HttpClient) { }
 
-  add(variant : Variant ){
-    return this.http.post<any>('http://localhost:8086/api/v1/variant/save',variant);
+ 
+  saveVariant(sousOptionList: any| undefined, id:any): Observable<Variant> {
+    const variantData = { 
+      idproduit : id,sousOptionId: sousOptionList! };
+    return this.http.post<Variant>('http://localhost:8086/api/v1/variant/save', variantData);
   }
+
+  GetVariantByIdProduit(id: any):Observable<any>{
+    return this.http.get<any>(`http://localhost:8086/api/v1/variant/getvariantByIdProduit/` + id)
+
+  }
+
 
   update(variant : Variant, id: any):Observable<any>{
     return this.http.put<any>(`http://localhost:8086/api/v1/variant/update/` + id, variant );
