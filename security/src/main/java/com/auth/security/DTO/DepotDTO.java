@@ -15,6 +15,7 @@ public class DepotDTO {
     private Integer Id;
     private int quantity;
     private Integer idEntreprise;
+    private Integer idGestionnaire;
     private String adresse;
     private String name;
 

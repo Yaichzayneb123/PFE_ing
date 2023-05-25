@@ -44,6 +44,10 @@ public class GestionnaireServiceImpl implements GestionnaireService{
         //gestDTO.setImage(fileLoaderService.loadFile(photo));
         Gestionnaire gest = new Gestionnaire();
             gest  =     modelMapper.map(gestDTO,Gestionnaire.class);
+//validation besh ki nekteb nafss mail ma tet3adesh
+        if (gestionnaireDAO.existsByEmail(gest.getEmail())) {
+            throw new IllegalArgumentException("Un gestionnaire avec cette adresse e-mail existe déjà !");
+        }
 
         Optional<Societe> soc= societeDAO.findById(gestDTO.getSociete());
         gest.setSociete(soc.get());
@@ -51,27 +55,39 @@ public class GestionnaireServiceImpl implements GestionnaireService{
                 "Cher Gestionnaire,\n  Votre username : " +gest.getEmail()+"\n "
                         + "Mot de passe : "+gest.getPassword());
         gest.setEmailVerified(true);
+        gestionnaireDAO.save(gest);
         Users Valid = UserMapper.toUser(gest);
         Valid.setPassword(passwordEncoder.encode(gest.getPassword()));
         //Valid.setEmailVerified(true);
         userDAO.save(Valid);
-        return gestionnaireDAO.save(gest);
+        return gest;
 
     }
 
 
 
     @Override
+    //njibhom b societe
     public List<Gestionnaire> getAllgest() {
         return gestionnaireDAO.findAll();
     }
 
     @Override
-    public Gestionnaire findById(Integer id) {
-        return gestionnaireDAO.findById(id).get();
+    public GestionnaireDTO findById(Integer id) {
+        Gestionnaire gest =gestionnaireDAO.findById(id).get();
+      GestionnaireDTO dto = new GestionnaireDTO();
+      dto.setFirstName(gest.getFirstName());
+      dto.setLastName(gest.getLastName());
+      dto.setEmail(gest.getEmail());
+      dto.setCountry(gest.getCountry());
+      dto.setAddress(gest.getAddress());
+      dto.setPhone(gest.getPhone());
+        dto.setSociete(gest.getSociete().getId());
+        return dto;
     }
 
     @Override
+
     public Gestionnaire updategest(Integer id, GestionnaireDTO dto) {
         Gestionnaire currentGest = gestionnaireDAO.findById(id)
                 .orElseThrow(() -> new MyResourceNotFoundException("gestionnaire id not found "+ id));
@@ -88,5 +104,10 @@ public class GestionnaireServiceImpl implements GestionnaireService{
     @Override
     public void Delete(Integer id) {
         gestionnaireDAO.deleteById(id);
+    }
+
+    @Override
+    public int countGests() {
+        return gestionnaireDAO.countAllGests();
     }
 }

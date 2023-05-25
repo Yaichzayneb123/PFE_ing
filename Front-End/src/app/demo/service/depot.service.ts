@@ -25,6 +25,9 @@ delete(id:any){
 update(depot : Depot, id: any):Observable<any>{
   return this.http.put<any>(`http://localhost:8086/api/v1/depot/update/` + id, depot);
 }
+getNbDepots() {
+  return this.http.get<any>(`http://localhost:8086/api/v1/depot/count` )
+}
 
 
   

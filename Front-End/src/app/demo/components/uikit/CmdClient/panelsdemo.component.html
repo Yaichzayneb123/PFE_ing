@@ -1,0 +1,46 @@
+
+    <div class="col-12">
+      <p-toast></p-toast>
+        <div class="card">
+          <h5>Commande Client</h5>
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-12">
+              <label htmlFor="state">Client</label>
+              <p-autoComplete [(ngModel)]="selectedClient" [suggestions]="allClient" (completeMethod)="filterClient($event)" field="firstName" [dropdown]="true"></p-autoComplete>
+            </div>
+            <table>
+              <tr *ngFor="let product of selectedProductList; let i = index">
+                <td>
+                  <div class="field mr-3">
+                    <label for="product{{ i }}">Product</label>
+                    <p-autoComplete [(ngModel)]="product.name" [suggestions]="filteredCountries" (onSelect)="onSelect($event )" (completeMethod)="filterCountry($event)" field="name" [dropdown]="true"></p-autoComplete>
+                  </div>
+                </td>
+                <td>
+                  <div class="field mr-2">
+                    <label for="quantity{{ i }}">Quantity</label>
+                    <p-inputNumber [(ngModel)]="product.quantityCmd" [showButtons]="true" [min]="0" [max]="maxQte" (ngModelChange)="calculeTotal(product,i)" field="quantityCmd"></p-inputNumber>
+                  </div>
+                </td>
+                <td>
+                  <div class="field mr-6">
+                    <h3>Total: {{ product.total }}</h3>
+                  </div>
+                </td>
+                <td>
+                  <div class="field col-12 md:3">
+                    <button pButton pRipple icon="pi pi-plus" class="p-button-warning mt-5" (click)="addProduct()"></button>
+                  </div>
+                </td>
+              </tr>
+            </table> 
+            <h3 class="field col-12 md:3">Total de tous les produits : {{ totalAllProducts }}</h3>
+              
+          </div>
+          <p-button label="Enregistrer la commande " styleClass="p-button-rounded p-button-warning" (click)="saveCommande()" [disabled]="maxQte === 0"></p-button>
+        </div>
+      
+      </div>
+      
+            
+      

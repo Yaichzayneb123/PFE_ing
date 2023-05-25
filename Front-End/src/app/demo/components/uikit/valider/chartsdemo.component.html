@@ -1,0 +1,55 @@
+<div class="grid">
+	<div class="col-12">
+		<p-toast></p-toast>
+		
+
+	<div class="col-12">
+		<div class="card">
+			<h5>Valider les comptes  </h5>
+		
+
+			<p-table [value]="societe" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="width:200px" pFrozenColumn>Nom Societe</th>
+						<th style="width:200px">Email</th>
+						<th style="width:200px">Site</th>
+						<th style="width:200px">Phone</th>
+						<th style="width:200px">Matricule</th>
+						<th style="width:200px">Status</th>
+						
+						<!-- <th style="width:200px" pFrozenColumn alignFrozen="right">Balance</th> -->
+						
+						<th style="width:200px">Valider</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-soc>
+					<tr>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{soc.nomSociete}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{soc.email}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{soc.site}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{soc.tel}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{soc.mat}}</td>
+		
+						<td class="text-center" >
+							<i class="pi" style="margin-right: 80px;"  [ngClass]="{'true-icon pi-check-circle text-green-500': soc.verified, 'false-icon pi-times-circle text-pink-500': !soc.verified}"></i>
+						</td>
+
+						
+						
+						<td>
+                            <div class="flex">
+                               
+								<p-button label="Valider" styleClass="p-button-success" (click)="valid(soc.id)" [disabled]="soc.verified"></p-button>
+                            </div>
+                        </td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
+	
+		
+
+
+

@@ -2,7 +2,6 @@ package com.auth.security.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -31,22 +30,20 @@ public class Produit  {
     private String description;
 
     @Column(name = "price")
-    private String price;
+    private Integer price;
 
     @Column(name = "image")
     private String image;
 
     @Column(name = "quantity")
-    private String quantity;
+    private Integer quantity;
 
-
+    @Column(name = "quantitycmd")
+    private Integer quantityCmd;
 
 
     @Column(name = "inventoryStatus")
     private String inventoryStatus;
-
-
-
 
     @ManyToOne()
     @JoinColumn(name = "depot_id")

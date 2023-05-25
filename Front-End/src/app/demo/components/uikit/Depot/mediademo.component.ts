@@ -6,6 +6,7 @@ import { Depot } from 'src/app/demo/modéle/depot';
 import { DepotService } from 'src/app/demo/service/depot.service';
 import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './mediademo.component.html',
@@ -22,6 +23,7 @@ export class MediaDemoComponent implements OnInit {
     depot: Depot ={};
     currentUser: any;
     submitted: boolean = false;
+    idGestionnaire:any;
 
     depo: Depot[] = [];
     id: any;
@@ -64,7 +66,7 @@ export class MediaDemoComponent implements OnInit {
         }
     ];
 
-    constructor(private productService: ProductService, private photoService: PhotoService, private depotService: DepotService, private messageService: MessageService,private  Service: LayoutService) { }
+    constructor( private act: ActivatedRoute,private productService: ProductService, private photoService: PhotoService, private depotService: DepotService, private messageService: MessageService,private  Service: LayoutService) { }
 
     ngOnInit() {
 
@@ -110,7 +112,9 @@ export class MediaDemoComponent implements OnInit {
     }
     saveEvent(){
         this.depot.idEntreprise = this.currentUser.id;
+    
         this.depotService.addDepot(this.depot)
+        
         .subscribe(res=>{
           
             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Depot Created', life: 3000 });

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SocieteDTO {
-
+    private Integer id;
     private String nomSociete;
     private String email;
     private String tel;
@@ -20,6 +20,7 @@ public class SocieteDTO {
     private String reg;
     private String logo;
     private String password;
+    private boolean verified = false;
 
 
 

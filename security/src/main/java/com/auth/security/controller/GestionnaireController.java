@@ -36,7 +36,7 @@ public class GestionnaireController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Gestionnaire> findById(@PathVariable("id") Integer id){
+    public ResponseEntity<GestionnaireDTO> findById(@PathVariable("id") Integer id){
         return ResponseEntity.ok().body(service.findById(id));
     }
     @GetMapping("/getgest")
@@ -49,4 +49,10 @@ public class GestionnaireController {
     public void delete(@PathVariable() Integer id) {
         service.Delete(id);
     }
+
+    @GetMapping("/count")
+    public int countGests() {
+        return service.countGests();
+    }
+
 }

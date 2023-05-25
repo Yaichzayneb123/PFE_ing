@@ -13,4 +13,5 @@ List <Depot> GetAll();
     void Delete (Integer id);
     List<ProduitDTO> getProduitByDepotId(Integer id);
     DepotDTO updateDepot (Integer id, DepotDTO depot);
+    int countDepots();
 }

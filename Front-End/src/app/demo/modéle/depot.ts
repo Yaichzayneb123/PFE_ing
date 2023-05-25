@@ -4,6 +4,7 @@ export interface Depot {
     adresse?: string;
     quantity?: string;
     idEntreprise?: number;
+    idGestionnaire?:number;
 
     
     

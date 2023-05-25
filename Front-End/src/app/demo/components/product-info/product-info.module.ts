@@ -18,9 +18,13 @@ import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
 import { ToastModule } from 'primeng/toast';
 import { Tree, TreeModule } from 'primeng/tree';
-import { TreeDemoModule } from '../uikit/tree/treedemo.module';
+import { TreeDemoModule } from '../uikit/listCmdCGest/treedemo.module';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { CarouselModule } from 'primeng/carousel';
+import { ImageModule } from 'primeng/image';
+import { GalleriaModule } from 'primeng/galleria';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -49,7 +53,15 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     ToastModule,
     TreeModule,
     CheckboxModule,
-    PanelMenuModule
+    PanelMenuModule,
+    CarouselModule,
+    ImageModule,
+    GalleriaModule,
+    InputNumberModule
+
+
+
+		
     
     
 		

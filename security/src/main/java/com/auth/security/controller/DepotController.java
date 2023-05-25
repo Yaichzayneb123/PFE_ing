@@ -50,5 +50,9 @@ public class DepotController {
         DepotDTO updatedDepot = service.updateDepot(id, dto);
         return new ResponseEntity<>(updatedDepot, HttpStatus.OK);
     }
+    @GetMapping("/count")
+    public int countClients() {
+        return service.countDepots();
+    }
 
 }

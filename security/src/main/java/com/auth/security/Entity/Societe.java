@@ -46,8 +46,12 @@ public class Societe {
 
         @Column(name = "LOGO")
         private String logo;
+
+        @Column(name = "verified")
+        private boolean verified = false;
+
         @Column(name = "password")
-        private String password;
+        private String password = UUID.randomUUID().toString();
 
         @OneToMany(mappedBy = "societe")
         @JsonManagedReference
@@ -61,6 +65,12 @@ public class Societe {
         @Column(name = "stocks")
         @JsonManagedReference
         private List<Depot> stockList;
+
+        //@OneToMany(mappedBy = "societe", cascade = CascadeType.ALL)
+        //@Column(name = "cmdClients")
+        //@JsonIgnoreProperties({"societe", "produitList", "stockList"})
+        //private List<CommandeClient> cmdClientList;
+
 
 
 

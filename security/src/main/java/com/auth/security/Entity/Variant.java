@@ -21,6 +21,9 @@ public class Variant  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
 
     @ManyToOne()
     @JoinColumn(name = "idproduit")

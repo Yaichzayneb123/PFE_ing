@@ -87,23 +87,24 @@ public class ProduitServiceImpl implements ProduitService {
 
     @Override
     public List<ProduitDTO> getProduits() {
-            List<Produit> produits = produitDAO.findAll();
-            List<ProduitDTO> customProduits = new ArrayList<>();
-            for (Produit produit : produits) {
-                ProduitDTO dto = new ProduitDTO();
-                //dto.setCategoryName(produit.getCategorie().getName());
-                dto.setName(produit.getName());
-                dto.setDescription(produit.getDescription());
-                dto.setPrice(produit.getPrice());
-                dto.setImage(produit.getImage());
-                dto.setQuantity(produit.getQuantity());
-                dto.setInventoryStatus(produit.getInventoryStatus());
-                customProduits.add(dto);
-            }
-            return customProduits;
+        List<Produit> produits = produitDAO.findAll();
+        List<ProduitDTO> customProduits = new ArrayList<>();
+        for (Produit produit : produits) {
+            ProduitDTO dto = new ProduitDTO();
+            dto.setId(produit.getId());
+            dto.setName(produit.getName());
+            dto.setDescription(produit.getDescription());
+            dto.setPrice(produit.getPrice());
+            dto.setImage(produit.getImage());
+            dto.setQuantity(produit.getQuantity());
+            //dto.setCategory(produit.getCategorie().getId());
+            //dto.setDepotId(produit.getDepot().getId());
+            dto.setInventoryStatus(produit.getInventoryStatus());
+            //dto.setSociete(produit.getSociete().getId());
+            customProduits.add(dto);
         }
-
-
+        return customProduits;
+    }
 
     @Override
     public List<Produit> getproductsByIdcategorie (Integer id) {
@@ -156,7 +157,7 @@ public class ProduitServiceImpl implements ProduitService {
         updatedProduitDTO.setQuantity(currentProduit.getQuantity());
         updatedProduitDTO.setName(currentProduit.getName());
         updatedProduitDTO.setCategory(produit.getCategory());
-        updatedProduitDTO.setSociete(produit.getSociete());
+        //updatedProduitDTO.setSociete(produit.getSociete());
         updatedProduitDTO.setImage(produit.getImage());
         updatedProduitDTO.setInventoryStatus(currentProduit.getInventoryStatus());
 
@@ -169,5 +170,11 @@ public class ProduitServiceImpl implements ProduitService {
     public void Delete(Integer id) {
         produitDAO.deleteById(id);
     }
+
+    @Override
+    public int countProds() {
+        return produitDAO.countAllProduits();
+    }
+
 }
 

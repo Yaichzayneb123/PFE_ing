@@ -18,6 +18,7 @@ public interface ProduitService {
     void Delete (Integer id);
 
     List<Produit> getproductsByIdcategorie(Integer id);
+    int countProds();
 
 
 }

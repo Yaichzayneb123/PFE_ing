@@ -67,7 +67,10 @@ public class ProduitController {
     public List<Produit> getProductsByIdCategorie(@PathVariable Integer id) {
         return service.getproductsByIdcategorie(id);
     }
-
+    @GetMapping("/count")
+    public int countClients() {
+        return service.countProds();
+    }
 
 
 }

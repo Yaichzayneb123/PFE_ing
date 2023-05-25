@@ -1,14 +1,10 @@
 package com.auth.security.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,9 +18,6 @@ public class SousOption {
 
     @Column(name = "name")
     private String name;
-
-
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id")

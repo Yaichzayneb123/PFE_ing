@@ -15,9 +15,10 @@ public interface GestionnaireService {
 
     Gestionnaire save(GestionnaireDTO chaine) throws IOException;
     List<Gestionnaire> getAllgest();
-    Gestionnaire findById(Integer id);
+    GestionnaireDTO findById(Integer id);
     Gestionnaire updategest(Integer id, GestionnaireDTO dto);
     void Delete (Integer id);
+    int countGests();
 
 
 }

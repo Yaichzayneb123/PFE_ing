@@ -2,11 +2,9 @@ package com.auth.security.Service;
 
 import com.auth.security.DTO.DepotDTO;
 import com.auth.security.DTO.ProduitDTO;
-import com.auth.security.Entity.Categorie;
-import com.auth.security.Entity.Produit;
-import com.auth.security.Entity.Societe;
-import com.auth.security.Entity.Depot;
+import com.auth.security.Entity.*;
 import com.auth.security.Exception.MyResourceNotFoundException;
+import com.auth.security.Repository.GestionnaireDAO;
 import com.auth.security.Repository.SocieteDAO;
 import com.auth.security.Repository.DepotDAO;
 import jakarta.transaction.Transactional;
@@ -29,6 +27,9 @@ public class DepotServiceImpl implements DepotService {
     @Autowired
 
     private DepotDAO depotDAO;
+    @Autowired
+
+    private GestionnaireDAO gestionnaireDAO;
     @Autowired
     private SocieteDAO societeDAO;
     private ModelMapper modelMapper = new ModelMapper();
@@ -111,5 +112,9 @@ public class DepotServiceImpl implements DepotService {
         return updatedDepotDTO;
 
 
+    }
+    @Override
+    public int countDepots() {
+        return depotDAO.countAllDepots();
     }
 }

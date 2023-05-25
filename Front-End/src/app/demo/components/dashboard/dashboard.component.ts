@@ -4,6 +4,9 @@ import { Product } from '../../modéle/product';
 import { ProductService } from '../../service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { ClientService } from '../../service/client.service';
+import { DepotService } from '../../service/depot.service';
+import { GestionnaireService } from '../../service/gestionnaire.service';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -19,14 +22,47 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chartOptions: any;
 
     subscription!: Subscription;
+    totalClients?: number;
+    totalProds?: number;
+    totalDepots?:number;
+    totalGests?:number;
 
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
+    constructor(private gestService:GestionnaireService,private depotService:DepotService,private prodService:ProductService,private clientService:ClientService,private productService: ProductService, public layoutService: LayoutService) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
         });
     }
 
     ngOnInit() {
+        this.depotService.getNbDepots().subscribe(
+                
+            res=>{
+             
+             this.totalDepots = res
+                console.log(res);
+        
+              },
+              err=>{
+                console.log(err);
+        
+              }
+            )
+
+        this.clientService.getNbClients().subscribe(
+                
+            res=>{
+             
+             this.totalClients = res
+                console.log(res);
+        
+              },
+              err=>{
+                console.log(err);
+        
+              }
+            )
+           this.totalPros();
+                this. totalGest();
         this.initChart();
         this.productService.getProductsSmall().then(data => this.products = data);
 
@@ -34,6 +70,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
             { label: 'Add New', icon: 'pi pi-fw pi-plus' },
             { label: 'Remove', icon: 'pi pi-fw pi-minus' }
         ];
+    }
+    totalGest(){
+        this.gestService.getNbGests().subscribe(
+                
+            res=>{
+             
+             this.totalGests = res
+                console.log(res);
+        
+              },
+              err=>{
+                console.log(err);
+        
+              }
+            )
+
+    }
+    totalPros(){
+        this.prodService.getNbProds().subscribe(
+                
+            res=>{
+             
+             this.totalProds = res
+                console.log(res);
+        
+              },
+              err=>{
+                console.log(err);
+        
+              }
+            )
     }
 
     initChart() {

@@ -22,6 +22,8 @@ export class VariantComponent implements OnInit {
   // variant: Variant {};
   variantDialog: boolean = false;
   optionDialog: boolean = false;
+  deleteVariantDialog:boolean = false;
+
   cols: any[] = [];
   statuses: any[] = [];
 
@@ -42,16 +44,16 @@ export class VariantComponent implements OnInit {
   selectedOptionIds: number[] = [];
 
   selectedOptions: number[] = [];
+
+  variantList: Variant[]=[];
+  variant: any;
+  variants:any;
   
-
-  variantList?: Variant[];
-  
-
-  
-
-
-
+  showButtons:boolean=false;
   id: any;
+  selectedQuantity: number = 1
+  quantityProd:any;
+
   constructor(private nodeService: NodeService,private act: ActivatedRoute,private productService: ProductService, private messageService: MessageService, private variantService: VariantService, private optionService:OptionService ) { }
  
 
@@ -61,9 +63,11 @@ export class VariantComponent implements OnInit {
     // this.dataArray.push(this.option);
   this.idProduct= this.act.snapshot.paramMap.get('id');
   console.log(this.idProduct);
+
   this.productService.getProductById(this.idProduct).subscribe(
     res=>{
       console.log(res);
+      this.quantityProd=res.quantity;
     }
   )
   //this.optionService.getOption().then((data) => (this.files = data));
@@ -140,16 +144,50 @@ onCheckboxChange(sousOptionId: any) {
 getVariantByIdProduit(){
   this.variantService.GetVariantByIdProduit(this.idProduct ).subscribe((variants: Variant[]) => {
     this.variantList = variants;
+
     
 
   });
   } 
 
 
-onSave(){
-  this.variantService.saveVariant(this.selectedOptionsList,this.idProduct).subscribe((response) => {
-    console.log(response);
-  });
+  onSave(){
+    const quantity = this.selectedQuantity; 
+  
+    this.variantService.saveVariant(this.selectedOptionsList,this.idProduct,quantity)
+    .subscribe(
+      (response) => {
+      console.log("nshuuuf",response);
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'variant Created', life: 3000 });
+      this.ngOnInit();
+      this.variantDialog= false;
+      
+    },err =>{
+      this.messageService.add({ severity: 'error', summary: 'error', detail: 'La quantité de variant dépasse celle de produit', life: 3000 });
+      this.variantDialog= false;
+      
+    }
+    );
+}
+delete(id:any){
+  this.variantService.delete(id)
+  .subscribe(
+    res=>{
+      this.messageService.add({ severity: 'error', summary: 'Successful', detail: 'client deleted', life: 3000 });
+      // this.ngOnInit();
+      // this.hideDialog();
+      console.log(res);
+    },
+    err=>{
+      console.log(err);
+    }
+  )
+
+}
+deleteUser(id:any) {
+  this.deleteVariantDialog= true;
+  this.id=id;
+  
 }
 
 

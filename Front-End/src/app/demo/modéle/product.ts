@@ -11,8 +11,10 @@ export interface Product {
     description?: string;
     price?: number;
     quantity?: number;
+    quantityCmd?:number;
     inventoryStatus?: InventoryStatus;
     category?: number;
+    cat?:Categorie;
     image?: string;
     // rating?: number;
     societe?: number;

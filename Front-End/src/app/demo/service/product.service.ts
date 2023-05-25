@@ -79,4 +79,8 @@ export class ProductService {
         data.append('image', image);
         return this.http.post<any>(this.apiUrl + "/Add" , data);
       }
+
+      getNbProds() {
+        return this.http.get<any>(`http://localhost:8086/api/v1/produit/count` )
+    }
 }

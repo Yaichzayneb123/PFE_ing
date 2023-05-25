@@ -12,6 +12,7 @@ export class AppMenuComponent implements OnInit {
 
     admin: boolean = false;
     gest: boolean = false;
+    superAdmin: boolean = false;
     login:  boolean = false;
     private roles: string[]=[]; 
 
@@ -22,9 +23,16 @@ export class AppMenuComponent implements OnInit {
         this.login = this.layoutService.isLoggedIn();
         if(this.login) {
             const user = this.layoutService.getDataFromToken();
+        
             this.roles = user.role[0].authority
+            console.log(this.roles);
             this.admin= this.roles.includes('ADMIN');
             this.gest= this.roles.includes('GestionnaireDeStock');
+            this.superAdmin=this.roles.includes('SUPERADMIN');
+            console.log(this.superAdmin)
+
+           
+
 
             if(this.admin) {
                 this.model=[
@@ -33,71 +41,103 @@ export class AppMenuComponent implements OnInit {
                                 items: [
                                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dash'] },
                                     { label: 'Depot', icon: 'pi pi-fw pi-image', routerLink: ['/dash/uikit/media'] },
+                                    {
+                                        label: 'category',
+                                        icon: 'pi pi-fw pi-server',
+                                        routerLink: ['/dash/pages/empty']
+                                    },
                                     { label: 'Gestion User', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/table'] },
                                     // {
                                     //     label: 'Gestion produit',
                                     //     icon: 'pi pi-fw pi-shopping-cart',
                                     //     routerLink: ['/dash/pages/crud']
                                     // },
-                                    {
-                                        label: 'category',
-                                        icon: 'pi pi-fw pi-server',
-                                        routerLink: ['/dash/pages/empty']
-                                    },
+                                   
+                                    { label: 'Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/file'] },
+                                    { label: 'CommandeClient', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/panel'] },
+                                    { label: 'ListCommande Client', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/misc'] },
+                                    { label: 'Fournisseur', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/button'] },
+                                    { label: 'Commande Fournisseur', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/message'] },
+                                    { label: 'Liste Commande Fournisseur', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/invalidstate'] },
+
+
                                     { label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/dash/uikit/list'] },
-                                    {
-                                        label: 'Landing',
-                                        icon: 'pi pi-fw pi-globe',
-                                        routerLink: ['/dash/landing']
-                                    },
+                                    // {
+                                    //     label: 'Landing',
+                                    //     icon: 'pi pi-fw pi-globe',
+                                    //     routerLink: ['/dash/landing']
+                                    // },
                                     // { label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/dash/uikit/menu'], routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' } },
-                                    { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/dash/uikit/input'] },
+                                    // { label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/dash/uikit/input'] },
                                     
                                     
-                                    {
-                                        label: 'Auth',
-                                        icon: 'pi pi-fw pi-user',
-                                        items: [
-                                            {
-                                                label: 'Login',
-                                                icon: 'pi pi-fw pi-sign-in',
-                                                routerLink: ['/auth/login']
-                                            },
-                                            {
-                                                label: 'Register',
-                                                icon: 'pi pi-fw pi-user',
-                                                routerLink: ['/auth/error']
-                                            },
-                                            {
-                                                label: 'Access Denied',
-                                                icon: 'pi pi-fw pi-lock',
-                                                routerLink: ['/auth/access']
-                                            },
+                                    // {
+                                    //     label: 'Auth',
+                                    //     icon: 'pi pi-fw pi-user',
+                                    //     items: [
+                                    //         {
+                                    //             label: 'Login',
+                                    //             icon: 'pi pi-fw pi-sign-in',
+                                    //             routerLink: ['/auth/login']
+                                    //         },
+                                    //         {
+                                    //             label: 'Register',
+                                    //             icon: 'pi pi-fw pi-user',
+                                    //             routerLink: ['/auth/error']
+                                    //         },
+                                    //         {
+                                    //             label: 'Access Denied',
+                                    //             icon: 'pi pi-fw pi-lock',
+                                    //             routerLink: ['/auth/access']
+                                    //         },
                                             
-                                        ]
-                                    },
+                                    //     ]
+                                    // },
                                 ]
                             },
                 ]
-                
-
+            
 
             }
+
             if(this.gest){
                 this.model=[
                     {
                                 label: 'home Gestionnaire',
                                 items: [
+                                    { label: 'Depot', icon: 'pi pi-fw pi-image', routerLink: ['/dash/uikit/floatlabel'] },
                                    
-                                    {
-                                        label: 'Gestion produit',
-                                        icon: 'pi pi-fw pi-shopping-cart',
-                                        routerLink: ['/dash/pages/crud']
-                                    },
+                                    // {
+                                    //     label: 'Gestion produit',
+                                    //     icon: 'pi pi-fw pi-shopping-cart',
+                                    //     routerLink: ['/dash/pages/crud']
+                                    // },
                                     { label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/dash/uikit/list'] },
+                                    { label: 'Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/formlayout'] },
+                                    //{ label: 'CommandeClient', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/panel'] },
+                                    //{ label: 'ListCommande Client', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/misc'] },
+                                    { label: 'Commande Client', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/input'] },
+                                    { label: 'ListCommande Client', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/dash/uikit/tree'] },
                                 ]
                             },
                 ]
+            }
+
+            
+            if(this.superAdmin) {
+                this.model=[
+                    {
+                        label: 'home Super Admin',
+                                items: [
+                                   
+
+                                   
+                                      { label: 'Gestion des admins', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/charts'] },
+                                    
+                                   
+                                ],
+                            },
+                ];
             }
 
 

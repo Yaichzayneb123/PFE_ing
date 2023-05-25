@@ -12,9 +12,9 @@ export class VariantService {
   constructor(private http: HttpClient) { }
 
  
-  saveVariant(sousOptionList: any| undefined, id:any): Observable<Variant> {
+  saveVariant(sousOptionList: any| undefined, id:any,quantity: number): Observable<Variant> {
     const variantData = { 
-      idproduit : id,sousOptionId: sousOptionList! };
+      idproduit : id,sousOptionId: sousOptionList!,quantity: quantity };
     return this.http.post<Variant>('http://localhost:8086/api/v1/variant/save', variantData);
   }
 

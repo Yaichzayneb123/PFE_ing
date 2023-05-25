@@ -1,0 +1,60 @@
+<div class="grid">
+	<div class="col-12">
+		<p-toast></p-toast>
+		
+	<div class="col-12">
+		<div class="card">
+			<h5>List Command Client</h5>
+			
+			
+			<p-table [value]="commande" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="width:200px" pFrozenColumn>Code</th>
+						<th style="width:200px">DateCommande</th>
+						<th style="width:200px">Montant</th>
+                        <th style="width:200px">Client</th>
+						<th style="width:200px">ListProd</th>
+						
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-commande>
+					<tr>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{commande.code}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{commande.dateCommande}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{commande. montant}} DT</td>
+                        <td style="width:200px" pFrozenColumn class="font-bold">{{commande.client}}</td>
+                        
+
+                        <td style="width:200px" pFrozenColumn class="font-bold">
+							<ul>
+								<li *ngFor="let produit of commande?.produitList">{{produit.name}}</li>
+							</ul>
+						</td>
+						
+                          
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
+
+
+	
+
+
+	
+</div>
+
+
+
+
+
+
+
+
+
+	
+
+
+	

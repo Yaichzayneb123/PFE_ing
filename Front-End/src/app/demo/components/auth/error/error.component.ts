@@ -13,6 +13,9 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class ErrorComponent { 
     admin : Register={};
+    image : any;
+    userFile : any;
+    imageURL : any;
 
 
     constructor(private builder: FormBuilder,public layoutService: LayoutService,private router: Router,private messageService: MessageService) { 
@@ -33,6 +36,15 @@ export class ErrorComponent {
        
       })
 }
+onSelectedImage(e: any){
+  this.image = e.target.files[0];
+  // @ts-ignore
+  this.image = document.querySelector("input[type=file]").files[0];
+  var readerimage = new FileReader();
+  readerimage.readAsDataURL(this.image);
+  readerimage.onload = (res=>{this.imageURL= readerimage.result})
+  console.log(this.image); 
+ }
 
     
     

@@ -20,10 +20,9 @@ public class VariantController {
     private VariantServiceImpl service;
 
     @PostMapping("/save")
-    public ResponseEntity<VariantDTO> save(
-            @RequestBody VariantDTO dto)
-    {
-        return ResponseEntity.ok(service.save(dto));
+    public ResponseEntity<VariantDTO> save(@RequestBody VariantDTO dto) throws Exception {
+        VariantDTO result = service.save(dto);
+        return ResponseEntity.ok(result);
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<Variant> updatevariant(@PathVariable("id") Integer id, @RequestBody VariantDTO variant) {

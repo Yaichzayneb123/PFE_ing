@@ -35,6 +35,9 @@ public class Users implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(name = "image")
+    private String image;
+
 
 
 

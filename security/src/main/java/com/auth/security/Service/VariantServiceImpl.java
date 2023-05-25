@@ -33,25 +33,54 @@ public class VariantServiceImpl implements VariantService{
     @Autowired
     private SousOptionDAO sousOptionDAO;
 
+
     @Override
-    public VariantDTO save (VariantDTO dto) {
+    public VariantDTO save(VariantDTO dto) throws Exception {
         List<SousOption> sousOptions = new ArrayList<>();
         VariantDTO variantDTO = new VariantDTO();
-        var variant=Variant.builder()
+
+        // Créer l'objet Variant et initialiser sa quantité à celle du DTO
+        Variant variant = Variant.builder()
+                .quantity(dto.getQuantity())
                 .build();
-        List<SousOption> list= sousOptionDAO.findAllById(dto.getSousOptionId());
+
+        // Ajouter les sous-options sélectionnées au variant
+        List<SousOption> list = sousOptionDAO.findAllById(dto.getSousOptionId());
         sousOptions.addAll(list);
         variant.setSousOptionList(sousOptions);
-        Optional<Produit> produit = produitDAO.findById(dto.getIdproduit());
-        variant.setProduit(produit.get());
 
-       Variant saved= variantDAO.save(variant);
-        variantDTO.setSousOptionList(saved.getSousOptionList());
-        variantDTO.setIdproduit(saved.getProduit().getId());
-        List<Integer>listIds=dto.getSousOptionId();
+        // Récupérer le produit correspondant
+        Optional<Produit> optionalProduit = produitDAO.findById(dto.getIdproduit());
+        if (!optionalProduit.isPresent()) {
+            throw new Exception("Le produit n'existe pas");
+        }
+        Produit produit = optionalProduit.get();
+
+        // Vérifier si la quantité du variant ne dépasse pas celle du produit
+        Integer sumQuantities = variantDAO.sumQuantitiesByProduitId(produit.getId());
+        if(sumQuantities == null){
+            sumQuantities = 0;
+        }
+        int produitQuantity = produit.getQuantity();
+        if (sumQuantities + variant.getQuantity() > produitQuantity)  {
+            throw new Exception("La quantité de variant dépasse celle de produit");
+        }
+
+        // Sauvegarder le variant
+        variant.setProduit(produit);
+        Variant savedVariant = variantDAO.save(variant);
+
+        // Mettre à jour le DTO
+        variantDTO.setSousOptionList(savedVariant.getSousOptionList());
+        variantDTO.setIdproduit(savedVariant.getProduit().getId());
+        List<Integer> listIds = dto.getSousOptionId();
         variantDTO.setSousOptionId(listIds);
+        variantDTO.setQuantity(savedVariant.getQuantity());
+
         return variantDTO;
     }
+
+
 
 
 
@@ -77,6 +106,7 @@ public class VariantServiceImpl implements VariantService{
                 variantDTO.setSousOptionList(variant.getSousOptionList());
                 List<Integer> sousOptionIds = variant.getSousOptionList().stream().map(SousOption::getId).collect(Collectors.toList());
                 variantDTO.setSousOptionId(sousOptionIds);
+                variantDTO.setQuantity(variant.getQuantity());
                 variantDTOList.add(variantDTO);
             }
             return variantDTOList;

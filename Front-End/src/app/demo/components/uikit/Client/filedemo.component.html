@@ -1,0 +1,167 @@
+<div class="grid">
+	<div class="col-12">
+		<p-toast></p-toast>
+		
+	<div class="col-12">
+		<div class="card">
+			<h5>Gestion Client </h5>
+			
+					<div>
+					<button pButton pRipple label="New" icon="pi pi-plus" class="p-button-warning mr-2" (click)="openNew()" ></button>
+				    </div>
+				
+		
+
+			<p-table [value]="client" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="width:200px" pFrozenColumn>FirstName</th>
+						<th style="width:200px">LastName</th>
+						<th style="width:200px">Email</th>
+						<th style="width:200px">Phone</th>
+						<th style="width:200px">Address</th>
+						<th style="width:200px">Option</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-client>
+					<tr>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{client.firstName}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{client.lastName}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{client.email}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{client.phone}}</td>
+						<td style="width:200px" pFrozenColumn class="font-bold">{{client.address}}</td>
+						
+						<td>
+                            <div class="flex">
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2 mt-2" (click)="editClient(client)" ></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mr-2 mt-2" (click)="deleteUser(client.id)"></button>
+								<!-- <button pButton pRipple icon="pi pi-info-circle" class="p-button-rounded p-button-info "  >Commande Client</button> -->
+
+                            </div>
+                        </td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
+	<p-dialog [(visible)]="deleteClientDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+		<div class="flex align-items-center justify-content-center">
+			<i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+			<span>Are you sure you want to delete selected Client ?</span>
+		</div>
+		<ng-template pTemplate="footer">
+			<button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientDialog = false"></button>
+			<button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="delete(id)"></button>
+		</ng-template>
+	</p-dialog>
+
+
+	<p-dialog [(visible)]="clientDialogupdate" [style]="{width: '450px'}" header="update Client"  class="p-fluid">
+		<ng-template pTemplate="content">
+			
+		
+		<!-- <input type="file" class="file-upload"  > -->
+			<div class="field">
+				<label for="name">FirstName</label>
+				<input type="text" pInputText id="name" name="firstName"  [(ngModel)]="clientt.firstName" />
+				<small class="ng-dirty ng-invalid" >Name is required.</small>
+			</div>
+			<div class="field">
+				<label for="name">LastName</label>
+				<input type="text" pInputText id="nameaa" name="lastName"  [(ngModel)]="clientt.lastName" />
+				<small class="ng-dirty ng-invalid" >Name is required.</small>
+			</div>
+			<div class="field">
+				<label htmlFor="email1">Email</label>
+				<input pInputText id="email1" type="text" name="email" [(ngModel)]="clientt.email" />
+			</div>
+			
+			<div class="field ">
+				<label htmlFor="city">phone</label>
+				<input pInputText id="city" type="text" [(ngModel)]="clientt.phone" />
+			</div>
+			<div class="field">
+				<label htmlFor="city">address</label>
+				<input pInputText id="citya" type="text" [(ngModel)]="clientt.address" />
+			</div>
+			
+			
+			
+
+			<!-- <div class="field ">
+				<label htmlFor="state">Role </label>
+				<p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+			</div> -->
+		
+		</ng-template>
+		<ng-template pTemplate="footer">
+			<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+			<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="modifier()"></button>
+		</ng-template>
+	</p-dialog>
+
+
+
+	<p-dialog [(visible)]="clientDialog" [style]="{width: '450px'}" header="save Client"  class="p-fluid">
+		<ng-template pTemplate="content">
+			
+		
+		<!-- <input type="file" class="file-upload"  > -->
+		<div class="field">
+			<label for="name">FirstName</label>
+			<input type="text" pInputText id="name" name="firstName"  [(ngModel)]="clientt.firstName" />
+			<small class="ng-dirty ng-invalid" >Name is required.</small>
+		</div>
+		<div class="field">
+			<label for="name">LastName</label>
+			<input type="text" pInputText id="nameaa" name="lastName"  [(ngModel)]="clientt.lastName" />
+			<small class="ng-dirty ng-invalid" >Name is required.</small>
+		</div>
+		<div class="field">
+			<label htmlFor="email1">Email</label>
+			<input pInputText id="email1" type="text" name="email" [(ngModel)]="clientt.email" />
+		</div>
+	
+		<div class="field ">
+			<label htmlFor="city">phone</label>
+			<input pInputText id="city" type="text" [(ngModel)]="clientt.phone" />
+		</div>
+		<div class="field">
+			<label htmlFor="city">address</label>
+			<input pInputText id="citya" type="text" [(ngModel)]="clientt.address" />
+		</div>
+		
+			
+		</ng-template>
+
+
+		<ng-template pTemplate="footer">
+			<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+			<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveEvent()"></button>
+
+		</ng-template>
+	</p-dialog>
+	<div class="col-12">
+
+	<!-- <div class="card">
+		<h5>Gestion Commande Client </h5>
+		
+				<div>
+				<button pButton pRipple label="New" icon="pi pi-plus" class="p-button-warning mr-2" (click)="openNew()" ></button>
+				</div>
+			
+	</div> -->
+</div>
+
+
+
+
+
+
+
+
+
+	
+
+
+	

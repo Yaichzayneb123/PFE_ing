@@ -1,8 +1,6 @@
 package com.auth.security.Service;
 
-import com.auth.security.DTO.DepotDTO;
-import com.auth.security.DTO.ProduitDTO;
-import com.auth.security.DTO.SocieteDTO;
+import com.auth.security.DTO.*;
 import com.auth.security.Entity.Gestionnaire;
 import com.auth.security.Entity.Produit;
 import com.auth.security.Entity.Societe;
@@ -21,5 +19,10 @@ public interface SocieteService {
 
     List<Gestionnaire> getGestionnaire (Integer Id);
     List<ProduitDTO> getProduit (Integer Id);
+    List<CmdClientDTO> getCommandeByIdSociete(Integer id);
+    List<CmdFourDTO> getCommandeFourByIdSociete(Integer id);
+    public SocieteDTO validateSociete(Integer id);
+
+    public List<SocieteDTO> getAll();
 
 }

@@ -8,7 +8,7 @@ import com.auth.security.Entity.Variant;
 import java.util.List;
 
 public interface VariantService {
-    VariantDTO save (VariantDTO dto) ;
+    VariantDTO save (VariantDTO dto) throws Exception;
     List<Variant> getAllVariants();
     void Delete (Integer id);
     Variant updatevariant(Integer id, VariantDTO variant);

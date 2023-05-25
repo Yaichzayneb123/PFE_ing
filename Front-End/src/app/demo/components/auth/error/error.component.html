@@ -10,7 +10,7 @@
             style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
             <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
                 <div class="text-center mb-5">
-                    <img src="assets/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3" />
+                    <img src="assets/demo/images/login/login.jpg" alt="Image" height="70" class="mb-3" />
                     <div class="text-900 text-3xl font-medium mb-3">
                         Welcome!
                     </div>
@@ -31,9 +31,11 @@
                     <input id="reg" type="text" placeholder="Registre de commerce" pInputText class="w-full md:w-30rem mb-5 mr-2"
                             style="padding:1rem" [(ngModel)]="admin.reg" />
 
-                    <!-- <label for="email1" class="block text-900 text-xl font-medium mb-2">Logo</label> -->
+                    
                     <input id="logo" type="text" placeholder="logo" pInputText class="w-full md:w-30rem mb-5"
                             style="padding:1rem" [(ngModel)]="admin.logo" />
+                           
+                            <!-- <input class="form-control" id="formFileSm" pInputText name="logo" [(ngModel)]="admin.logo" type="file"  required  onchange="console.log(event.target.files)" (change)="onSelectedImage($event)" > -->
 
                     <label for="email1" class="block text-900 text-xl font-medium mb-2"></label>
                     <input id="tel" type="text" placeholder="Tel" pInputText class="w-full md:w-30rem mb-5 mr-2"
@@ -63,7 +65,7 @@
                     <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" (click)=" proceedregister()"
                         ></button>
                         <div class="card-footer">
-                            <div class="d-flex justify-content-center links">
+                            <div class="d-flex justify-content-center links mt-2">
                               Back to Login !! <a routerLink="/auth/login" style="font-weight: bold;">Sign In</a>
                             </div>
                           
