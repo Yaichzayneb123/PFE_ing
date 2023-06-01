@@ -39,15 +39,32 @@ export class ListDemoComponent implements OnInit {
     accessoiresDialog: boolean=false;
     electonicDialog: boolean=false;
     fitnessDialog: boolean=false;
+    prod:any;
 
     constructor(private productService: ProductService,private  Service: LayoutService,private messageService: MessageService) { }
 
     ngOnInit() {
         this.currentUser=this.Service.getDataFromToken();
         console.log(this.currentUser.id);
-        this.productService.getProducts().then(data => this.products = data);
+       
+        //this.productService.getProducts().then(data => this.products = data);
         // this.productService.getProdbyIdSociete(this.currentUser.id ).subscribe(data => this.products = data);
-               
+      
+
+
+        this.productService.getProduitbyIdSociete(this.currentUser.id ).subscribe(
+                
+            res=>{
+             
+             this.prod = res
+                console.log(res);
+        
+              },
+              err=>{
+                console.log(err);
+        
+              }
+            )
 
         this.sourceCities = [
             { name: 'San Francisco', code: 'SF' },

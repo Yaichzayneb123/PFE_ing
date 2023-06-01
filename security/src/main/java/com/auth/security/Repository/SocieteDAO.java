@@ -21,4 +21,5 @@ public interface SocieteDAO extends JpaRepository<Societe, Integer> {
 
     @Override
     List<Societe> findAll();
+
 }

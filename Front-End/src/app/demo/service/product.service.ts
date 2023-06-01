@@ -19,17 +19,17 @@ export class ProductService {
     }
 
     getProducts() {
-        return this.http.get<any>('http://localhost:8086/api/v1/produit/getproduit')
+        return this.http.get<any>('http://localhost:8086/api/v1/produit/getproduit' )
             .toPromise()
             .then(res => res as Product[])
             .then(data => data);
     }
-    // updateProducts() {
-    //     return this.http.get<any>('http://localhost:8086/api/v1/produit/')
-    //         .toPromise()
-    //         .then(res => res as Product[])
-    //         .then(data => data);
-    // }
+    getProduitbyIdSociete(id: any) {
+        return this.http.get<any>(`http://localhost:8086/api/v1/produit/getproduit/` + id);
+            // .toPromise()
+            // .then(res => res as Customer[])
+    
+    }
 
   
       update( id: any, product: any ):Observable<any>{
@@ -45,7 +45,6 @@ export class ProductService {
     getProdbyIdSociete(id: any) :Observable<any>{
         return this.http.get<any>(`http://localhost:8086/api/v1/depot/produit/` + id)
            
-    
     }
     getProdbyIdCategorie(id: any) {
         return this.http.get<any>(`http://localhost:8086/api/v1/produit/` + id)

@@ -5,7 +5,7 @@
 
 	<div class="col-12">
 		<div class="card">
-			<h5>Valider les comptes  </h5>
+			<h5>Validate accounts </h5>
 		
 
 			<p-table [value]="societe" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="mt-3" responsiveLayout="scroll">
@@ -40,7 +40,7 @@
 						<td>
                             <div class="flex">
                                
-								<p-button label="Valider" styleClass="p-button-success" (click)="valid(soc.id)" [disabled]="soc.verified"></p-button>
+								<p-button label="Validate" styleClass="p-button-success" (click)="valid(soc.id)" [disabled]="soc.verified"></p-button>
                             </div>
                         </td>
 					</tr>

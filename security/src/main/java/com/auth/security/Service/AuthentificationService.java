@@ -5,7 +5,7 @@ import com.auth.security.DTO.AuthenticationResponse;
 import com.auth.security.DTO.SocieteDTO;
 
 public interface AuthentificationService {
-    public AuthenticationResponse register(SocieteDTO request);
+    public SocieteDTO register(SocieteDTO request);
 
     public AuthenticationResponse authenticate(AuthenticationRequest request);
 }

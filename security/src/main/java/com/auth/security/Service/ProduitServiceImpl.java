@@ -1,5 +1,6 @@
 package com.auth.security.Service;
 
+import com.auth.security.DTO.DepotDTO;
 import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.Entity.Categorie;
 import com.auth.security.Entity.Produit;
@@ -86,24 +87,28 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
     @Override
-    public List<ProduitDTO> getProduits() {
-        List<Produit> produits = produitDAO.findAll();
-        List<ProduitDTO> customProduits = new ArrayList<>();
-        for (Produit produit : produits) {
-            ProduitDTO dto = new ProduitDTO();
-            dto.setId(produit.getId());
-            dto.setName(produit.getName());
-            dto.setDescription(produit.getDescription());
-            dto.setPrice(produit.getPrice());
-            dto.setImage(produit.getImage());
-            dto.setQuantity(produit.getQuantity());
-            //dto.setCategory(produit.getCategorie().getId());
-            //dto.setDepotId(produit.getDepot().getId());
-            dto.setInventoryStatus(produit.getInventoryStatus());
-            //dto.setSociete(produit.getSociete().getId());
-            customProduits.add(dto);
-        }
-        return customProduits;
+    public List<ProduitDTO> getProduitsByIdSoc(Integer id) {
+        Optional<Societe> societe=societeDAO.findById(id);
+        if (societe.isPresent()) {
+            List<ProduitDTO> produitDTOList = new ArrayList<>();
+        for (Depot depot : societe.get().getStockList()) {
+            for (Produit produit : depot.getProduitList()) {
+                ProduitDTO dto = new ProduitDTO();
+                dto.setId(produit.getId());
+                dto.setName(produit.getName());
+                dto.setDescription(produit.getDescription());
+                dto.setPrice(produit.getPrice());
+                dto.setImage(produit.getImage());
+                dto.setQuantity(produit.getQuantity());
+                //dto.setCategoryName(produit.getCategorie().getName());
+                //dto.setDepotId(produit.getDepot().getId());
+                dto.setInventoryStatus(produit.getInventoryStatus());
+                //dto.setSociete(produit.getSociete().getId());
+                produitDTOList.add(dto);
+            }
+            return produitDTOList;
+        }}
+        return null;
     }
 
     @Override

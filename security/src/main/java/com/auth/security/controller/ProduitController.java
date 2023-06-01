@@ -1,5 +1,6 @@
 package com.auth.security.controller;
 
+import com.auth.security.DTO.DepotDTO;
 import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.Entity.Categorie;
 import com.auth.security.Entity.Depot;
@@ -35,10 +36,13 @@ public class ProduitController {
     private ModelMapper modelMapper = new ModelMapper();
     ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    @GetMapping("/getproduit")
-    public ResponseEntity<List<ProduitDTO>> getProduits(){
-        return ResponseEntity.ok().body(service.getProduits());
+    @GetMapping("/getproduit/{id}")
+    public ResponseEntity<List<ProduitDTO>> getProduitsSoc(@PathVariable Integer id){
+        List<ProduitDTO> prods = service.getProduitsByIdSoc(id);
+        return new ResponseEntity<>(prods, HttpStatus.OK);
+
     }
+
 
 
     @PostMapping(value="/Add", consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})

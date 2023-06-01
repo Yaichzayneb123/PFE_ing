@@ -4,6 +4,7 @@ import com.auth.security.DTO.GestionnaireDTO;
 import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.Entity.Gestionnaire;
 import com.auth.security.Entity.Produit;
+import com.auth.security.Entity.Societe;
 import com.auth.security.Entity.Users;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.jsonwebtoken.io.IOException;
@@ -19,6 +20,7 @@ public interface GestionnaireService {
     Gestionnaire updategest(Integer id, GestionnaireDTO dto);
     void Delete (Integer id);
     int countGests();
+
 
 
 }

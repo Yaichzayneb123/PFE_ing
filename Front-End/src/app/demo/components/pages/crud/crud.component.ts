@@ -37,6 +37,7 @@ export class CrudComponent implements OnInit {
 
     statuses: any[] = [];
     product: Product = {} ;
+    categoryNames: { [categoryId: number]: string } = {};
  
 
     image : any;
@@ -52,7 +53,7 @@ export class CrudComponent implements OnInit {
     rowsPerPageOptions = [5, 10, 20];
 
     cat: Categorie[] = [];
-    
+
     selectedCategory: any;
   
 
@@ -77,6 +78,7 @@ export class CrudComponent implements OnInit {
         ];
 
     }
+    
  getProductsBySociete(){
   this.idDepot= this.act.snapshot.paramMap.get('id');
   this.productService.getProdbyIdSociete(this.idDepot ).subscribe({

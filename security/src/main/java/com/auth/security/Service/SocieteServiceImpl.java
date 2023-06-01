@@ -35,7 +35,7 @@ public class SocieteServiceImpl implements SocieteService {
     private CmdFourDAO cmdFourDAO;
     private ModelMapper modelMapper = new ModelMapper();
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private  PasswordEncoder passwordEncoder;
     @Autowired
     private UserDAO userDAO;
 
@@ -95,8 +95,8 @@ public class SocieteServiceImpl implements SocieteService {
                         + "Mot de passe : "+soc.get().getPassword());
         soc.get().setVerified(true);
         Societe societe=societeDAO.save(soc.get());
-        Users Valid = UserMapper.toUser(soc.get());
-        Valid.setPassword(passwordEncoder.encode(soc.get().getPassword()));
+        Users Valid = UserMapper.toUser(societe);
+        Valid.setPassword(passwordEncoder.encode(societe.getPassword()));
 
         userDAO.save(Valid);
         return modelMapper.map(societe, SocieteDTO.class);
@@ -213,6 +213,7 @@ public class SocieteServiceImpl implements SocieteService {
             dto.setImage(produit.getImage());
             dto.setQuantity(produit.getQuantity());
             dto.setInventoryStatus(produit.getInventoryStatus());
+
             customProduits.add(dto);
         }
         return customProduits;

@@ -37,7 +37,7 @@ export class AppMenuComponent implements OnInit {
             if(this.admin) {
                 this.model=[
                     {
-                                label: 'Home Admin',
+                                label: 'Home Partenaire',
                                 items: [
                                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/dash'] },
                                     { label: 'Depot', icon: 'pi pi-fw pi-image', routerLink: ['/dash/uikit/media'] },
@@ -46,19 +46,19 @@ export class AppMenuComponent implements OnInit {
                                         icon: 'pi pi-fw pi-server',
                                         routerLink: ['/dash/pages/empty']
                                     },
-                                    { label: 'Gestion User', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/table'] },
+                                    { label: 'management User', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/table'] },
                                     // {
                                     //     label: 'Gestion produit',
                                     //     icon: 'pi pi-fw pi-shopping-cart',
                                     //     routerLink: ['/dash/pages/crud']
                                     // },
                                    
-                                    { label: 'Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/file'] },
-                                    { label: 'CommandeClient', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/panel'] },
-                                    { label: 'ListCommande Client', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/misc'] },
-                                    { label: 'Fournisseur', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/button'] },
-                                    { label: 'Commande Fournisseur', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/message'] },
-                                    { label: 'Liste Commande Fournisseur', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/invalidstate'] },
+                                    { label: 'management Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/file'] },
+                                    { label: 'Customer order', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/panel'] },
+                                    { label: 'List Customer order', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/misc'] },
+                                    { label: 'management supplier', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/button'] },
+                                    { label: 'Supplier Order', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/message'] },
+                                    { label: 'List Supplier Order', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/invalidstate'] },
 
 
                                     { label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/dash/uikit/list'] },
@@ -107,17 +107,14 @@ export class AppMenuComponent implements OnInit {
                                 items: [
                                     { label: 'Depot', icon: 'pi pi-fw pi-image', routerLink: ['/dash/uikit/floatlabel'] },
                                    
-                                    // {
-                                    //     label: 'Gestion produit',
-                                    //     icon: 'pi pi-fw pi-shopping-cart',
-                                    //     routerLink: ['/dash/pages/crud']
-                                    // },
+                                    
                                     { label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/dash/uikit/list'] },
-                                    { label: 'Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/formlayout'] },
-                                    //{ label: 'CommandeClient', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/panel'] },
-                                    //{ label: 'ListCommande Client', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/misc'] },
-                                    { label: 'Commande Client', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/input'] },
-                                    { label: 'ListCommande Client', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/dash/uikit/tree'] },
+                                    { label: 'management Client', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/formlayout'] },
+                                    { label: 'Customer order', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/input'] },
+                                    { label: 'List Customer order', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/dash/uikit/tree'] },
+                                    { label: 'management supplier', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/button'] },
+                                    { label: 'Supplier Order', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/dash/uikit/message'] },
+                                    { label: 'List Supplier Order', icon: 'pi pi-shopping-cart', routerLink: ['/dash/uikit/invalidstate'] },
                                 ]
                             },
                 ]
@@ -127,12 +124,12 @@ export class AppMenuComponent implements OnInit {
             if(this.superAdmin) {
                 this.model=[
                     {
-                        label: 'home Super Admin',
+                        label: 'home Super-Admin',
                                 items: [
                                    
 
                                    
-                                      { label: 'Gestion des admins', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/charts'] },
+                                      { label: 'company management', icon: 'pi pi-fw pi-user', routerLink: ['/dash/uikit/charts'] },
                                     
                                    
                                 ],

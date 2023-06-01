@@ -142,7 +142,7 @@ export class LayoutService {
       }
       logOut(){
         localStorage.removeItem('token');
-        this.router.navigate(['/auth/error']);
+        this.router.navigate(['/auth/login']);
       }
     
     

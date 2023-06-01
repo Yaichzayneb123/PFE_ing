@@ -4,6 +4,7 @@ import com.auth.security.DTO.GestionnaireDTO;
 import com.auth.security.DTO.ProduitDTO;
 import com.auth.security.Entity.Gestionnaire;
 import com.auth.security.Entity.Produit;
+import com.auth.security.Entity.Societe;
 import com.auth.security.Repository.GestionnaireDAO;
 import com.auth.security.Service.GestionnaireServiceImpl;
 import io.jsonwebtoken.io.IOException;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/gestionnaire")
@@ -54,5 +56,6 @@ public class GestionnaireController {
     public int countGests() {
         return service.countGests();
     }
+
 
 }

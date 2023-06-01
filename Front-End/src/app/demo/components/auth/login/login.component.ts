@@ -63,7 +63,7 @@ proceedlogin(){
 
        this.router.navigate(['/dash']); 
 
-        console.log(res); 
+       
     },
     err=>{
       console.log(err);

@@ -79,6 +79,7 @@ public class DepotServiceImpl implements DepotService {
                 produitDTO.setCategory(produit.getCategorie().getId());
                 produitDTO.setDescription(produit.getDescription());
                 produitDTO.setPrice(produit.getPrice());
+                produitDTO.setCategoryName(produit.getCategorie().getName());
                 produitDTOList.add(produitDTO);
             }
             return produitDTOList;

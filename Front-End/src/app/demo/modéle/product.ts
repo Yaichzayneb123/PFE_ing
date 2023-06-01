@@ -14,6 +14,7 @@ export interface Product {
     quantityCmd?:number;
     inventoryStatus?: InventoryStatus;
     category?: number;
+    categoryName?: string;
     cat?:Categorie;
     image?: string;
     // rating?: number;

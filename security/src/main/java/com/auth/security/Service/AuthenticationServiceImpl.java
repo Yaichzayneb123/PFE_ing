@@ -10,6 +10,7 @@ import com.auth.security.Repository.UserDAO;
 import com.auth.security.Entity.Users;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,13 +25,13 @@ public class AuthenticationServiceImpl implements AuthentificationService {
     @Autowired
     private SocieteDAO societeDAO;
 
-    private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    public AuthenticationResponse register(SocieteDTO request) {
+    private ModelMapper modelMapper = new ModelMapper();
+    public SocieteDTO register(SocieteDTO request) {
         var societe = new Societe().builder()
                 .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
+                .password((request.getPassword()))
                 .mat(request.getMat())
                 .reg(request.getReg())
                 .logo(request.getLogo())
@@ -39,14 +40,11 @@ public class AuthenticationServiceImpl implements AuthentificationService {
                 .nomSociete(request.getNomSociete())
                 .build();
         societeDAO.save(societe);
-       Users adminSociete = UserMapper.toUser(societe);
-        repository.save(adminSociete);
+
+        return modelMapper.map(societe, SocieteDTO.class);
 
 
-        var jwtToken = jwtService.generateToken(adminSociete);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

@@ -21,8 +21,10 @@ public class ProduitDTO {
     private String image;
     private Integer quantity;
     private Integer category;
+    private String categoryName;
    private Integer depotId;
     private String inventoryStatus;
+
 
 
     public static ProduitDTO fromEntity(Produit entity) {
@@ -30,20 +32,22 @@ public class ProduitDTO {
             return null;
         }
 
-        return new ProduitDTO(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getPrice(),
-                entity.getImage(),
-                entity.getQuantity(),
-                entity.getCategorie().getId(),
-                entity.getDepot().getId(),
-                entity.getInventoryStatus());
+        ProduitDTO dto = new ProduitDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setDescription(entity.getDescription());
+        dto.setPrice(entity.getPrice());
+        dto.setImage(entity.getImage());
+        dto.setQuantity(entity.getQuantity());
+        dto.setCategory(entity.getCategorie().getId());
+        dto.setDepotId(entity.getDepot().getId());
+        dto.setInventoryStatus(entity.getInventoryStatus());
+        //dto.setCategoryName(entity.getCategorie().getName()); // Ajout du nom de catégorie
 
-               /// entity.getSociete().getId()
-
+        return dto;
     }
+
+
 
     public static Produit toEntity(ProduitDTO dto) {
         Produit entity = new Produit();

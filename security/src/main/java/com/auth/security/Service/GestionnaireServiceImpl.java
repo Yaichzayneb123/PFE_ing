@@ -9,13 +9,16 @@ import com.auth.security.Repository.UserDAO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.jsonwebtoken.io.IOException;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,17 +28,19 @@ public class GestionnaireServiceImpl implements GestionnaireService{
     private GestionnaireDAO gestionnaireDAO;
     @Autowired
     private UserDAO userDAO;
+
+
     @Autowired
     private EmailServiceImpl emailServiceImpl;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    private ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     private ModelMapper modelMapper = new ModelMapper();
     @Autowired
     private SocieteDAO societeDAO;
+
+
 
 
     @Override
@@ -106,8 +111,14 @@ public class GestionnaireServiceImpl implements GestionnaireService{
         gestionnaireDAO.deleteById(id);
     }
 
+
+
     @Override
     public int countGests() {
-        return gestionnaireDAO.countAllGests();
-    }
+    return gestionnaireDAO.countAllGests();
+   }
+
+
+
+
 }
